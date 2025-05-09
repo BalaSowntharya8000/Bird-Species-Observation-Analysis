@@ -15,10 +15,15 @@ The project aims to analyze the distribution and diversity of bird species in tw
 
 ### Business Use Cases:
 **Wildlife Conservation:** Inform decisions on protecting critical bird habitats and enhancing biodiversity conservation efforts.
+
 **Land Management:** Optimize land use and habitat restoration strategies by understanding the preferences of different bird species.
+
 **Eco-Tourism:** Identify bird-rich areas to develop bird-watching tourism, attracting eco-tourists and boosting local economies.
+
 **Sustainable Agriculture:** Support the development of agricultural practices that minimize the impact on bird populations in grasslands and forests.
+
 **Policy Support:** Provide data-driven insights to help environmental agencies create effective conservation policies and strategies for vulnerable bird species.
+
 **Biodiversity Monitoring:** Track the health and diversity of avian populations, aiding in the monitoring of ecosystem stability.
 
 ### Project Setup in VS Code
@@ -33,55 +38,72 @@ Install the Jupyter extension for interactive notebooks.
 Set up a virtual environment to manage project dependencies separately from the global Python environment.
 
 Ensure you have Python 3.10 or higher installed.
+
 python -m venv venv
+
 venv\Scripts\activate     #On Windows 
 
 **Install the requirements**
+
 Install Dependencies: pip install -r requirements.txt
+
 Running the Streamlit App: streamlit run app/app.py
 
 ### Installation Instructions
-Install the necessary packages
+**Install the necessary packages**
 
 To run this project, install the following libraries (via pip if not already installed): 
-pip install streamlit pandas plotly openpyxl numpy 
+**pip install streamlit pandas plotly openpyxl numpy** 
 
 OR (Individually)
 
 To install the essential libraries for the project, run the following commands in the terminal:
 
-pip install streamlit - Streamlit library for building the web app
-pip install pandas - Pandas for data manipulation and handling dataframes
-pip install plotly - Plotly for creating interactive visualizations
-pip install openpyxl - Openpyxl to read/write Excel files
-pip install numpy - NumPy for numerical operations (useful for data manipulation)
+**pip install streamlit** - Streamlit library for building the web app
+
+**pip install pandas** - Pandas for data manipulation and handling dataframes
+
+**pip install plotly** - Plotly for creating interactive visualizations
+
+**pip install openpyxl** - Openpyxl to read/write Excel files
+
+**pip install numpy** - NumPy for numerical operations (useful for data manipulation)
 
 **Additional Libraries Used:**
 
-pip install seaborn    - Seaborn for advanced statistical data visualization (optional but useful) - Simplifies statistical data visualization
-pip install matplotlib - Matplotlib for creating static plots (alternative to Plotly) - Creates static, animated, and interactive plots
-pip install kaleido    - Needed if exporting Plotly graphs as static images  
+**pip install seaborn**    - Seaborn for advanced statistical data visualization (optional but useful) - Simplifies statistical data visualization
+
+**pip install matplotlib** - Matplotlib for creating static plots (alternative to Plotly) - Creates static, animated, and interactive plots
+
+**pip install kaleido**    - Needed if exporting Plotly graphs as static images  
 
 ### Set up a data folder for your dataset
 Create a data folder to store the bird observation dataset.
 
 ### Libraries and Frameworks
 **Streamlit:** Used to build the interactive web application.
+
 **Pandas:** Used for data manipulation and analysis.
+
 **Plotly:** Used to create interactive visualizations of the bird species data.
+
 **Openpyxl:** For reading/writing Excel files containing the observation data.
+
 **NumPy:** For handling numerical operations within the data.
 
 ### Code File Structure
 **1. bird_observation_analysis.ipynb (Jupyter Notebook)**
+
 Interactive environment for step-by-step data cleaning, EDA, and plotting
 Ideal for prototyping and visual feedback in VS Code
 
 **2. visualization.py (Python Script)**
+
 Contains reusable functions for interactive visualizations using Plotly
 Used within Streamlit for rendering dynamic charts
 
 **3.project_structure_guide.py (Python Script)**
+
 Summarizes the purpose of each file and how different modules interact
 Provides an overview of code organization and structure
 Acts as a guide to understand project flow and key commands
@@ -90,7 +112,9 @@ Acts as a guide to understand project flow and key commands
 Access the datasets used in this project from the following links:
 
 **Main Dataset (Drive Folder):** - https://drive.google.com/drive/folders/1Zry_64VTPuCR_NKdaWCt6MkQZ1m1xwqF
+
 **Forest Data: Google Sheet**    - https://docs.google.com/spreadsheets/d/1vwL5JSM5_ox6EBzGbJIVq-BDgm_MUttH/edit?gid=952191027#gid=952191027
+
 **Grassland Data: Google Sheet** - https://docs.google.com/spreadsheets/d/1buwl6kvAfoBlUgNJ5pDvD4ToWGXpbWr6/edit?gid=1372323324#gid=1372323324
 
 ### Dataset Structure
@@ -143,56 +167,85 @@ The dataset is split across multiple sheets representing different administrativ
 Our approach follows a modular and structured workflow
 
 **Data Loading & Cleaning**
+
 Load observation data from Excel files using openpyxl and pandas.
 Clean and preprocess data: handle missing values, rename columns, format dates, etc.
 
 **Exploratory Data Analysis (EDA)**
+
 Perform initial exploration in bird_observation_analysis.ipynb to understand trends, seasonality, and anomalies.
 Generate visual summaries such as species frequency, observation timelines, and geographic distribution.
 
 **Visualization Design**
+
 Use Plotly to build interactive graphs (bar charts, scatter plots, heatmaps).
 Encapsulate all visual logic in visualization.py to promote code reuse in Streamlit.
 
 **Code Documentation & Organization**
+
 Use summary_of_code_structure.py to provide an overview of how different components are organized and interconnected.
 
 **Streamlit Integration**
+
 Integrate visual and analytical functions into an interactive Streamlit app.
 Enable dynamic user interaction such as species selection, date filtering, and real-time chart updates.
 
 **Insights**
+
 Based on the visualizations and analyses, identified the key factors that influence bird species' preference for specific habitats and how environmental changes could impact biodiversity.
 
 ### Data Description Overview
 
 **Species Name** - Identifies the bird species observed, essential for trend and pattern analysis.
+
 **Observation Date** - Date of observation, helping track seasonal and temporal patterns.
+
 **Observation Count** - Number of birds spotted, indicating species abundance.
+
 **Weather Conditions** - Environmental factors influencing bird behavior and location.
+
 **Habitat Type** - The bird’s habitat classification, key for understanding preferences.
+
 **Observer Information** - Tracks the observer, ensuring data accuracy and expertise.
 
 ### Detailed Feature Navigation
 
 **Home:** Overview & Insights - Presents a summary of key findings and overall trends from the dataset.
+
 **Species Distribution: Distance & Flyover Trends** - Displays the spatial distribution of bird species based on distances and flyover patterns.
+
 **Temporal Heatmap: Monthly Activity** - Visualizes seasonal activity patterns by mapping bird observations across different months.
+
 **Species Filters:** Environmental Patterns - Allows filtering of species data by environmental factors such as temperature, humidity, and sky conditions.
+
 **Geographic Mapping:** Compare species diversity in forest and grassland ecosystems - Highlights geographic differences in species diversity across forest and grassland habitats.
+
 **Species Richness:** Count of unique species observed across habitats - Measures and compares species diversity in different habitats.
+
 **Top Observed Species:** Most frequently recorded species overall - Lists species that have been observed most frequently across all habitats.
+
 **Species Activity by Region and Season:** Seasonal and regional presence of bird species - Analyzes how species presence varies by region and season.
+
 **Temperature Bin by Habitat:** Species distribution across temperature ranges - Shows how species are distributed across different temperature ranges in various habitats.
+
 **Humidity Bin by Habitat:** Observation patterns under varying humidity conditions - Investigates how humidity levels affect species distribution.
+
 **Sky Conditions:** Effect of sky/cloud cover on species visibility - Examines how different sky conditions (cloud cover, clear sky) influence bird observations.
+
 **Wind Conditions:** Influence of wind conditions on bird observations - Explores the impact of varying wind conditions on bird sighting frequency.
+
 **Seasonal Observation Counts:** Number of observations across different seasons - Analyzes the number of bird observations across seasons to identify seasonal trends.
+
 **Seasonal Time Factor:** Time-of-day activity trends across seasons - Investigates activity patterns of birds during different times of the day across seasons.
+
 **Flyover Observed Species:** Analysis of species recorded as flyovers - Identifies species that were recorded as flyovers during observations.
+
 **Species Migration Patterns:** Migratory trends across months and regions - Visualizes the migration trends of bird species over different months and across regions.
+
 **At-Risk Species & Conservation:** Highlighting conservation-priority species - Identifies bird species that are at risk and require conservation attention.
+
 **Top 5 At-Risk Species:** Most observed vulnerable or endangered species - Focuses on the top 5 species at risk, based on frequency of sightings.
+
 **High Activity Zones:** Species Count - Pinpoints areas with the highest bird activity and species concentration.
 
 ### Technologies Used
@@ -208,25 +261,38 @@ Based on the visualizations and analyses, identified the key factors that influe
 
 ### Appliaction Tools:
 **VS Code:** Used as the integrated development environment (IDE) for writing Python code, Jupyter Notebooks, and managing project files.
+
 **Git & GitHub:** For version control and managing the code repository, ensuring smooth collaboration and tracking changes.
+
 **Python Environment:** Virtual environments like venv to manage dependencies for the project.
+
 **Jupyter Notebook:** Used for exploratory analysis, prototyping, and interactive data analysis (EG: bird_observation_analysis.ipynb).
 
 ### Expected Outcomes
 **Data Insights:** Expected to provide insights into bird species behavior, habitat preferences, and migration patterns.
+
 **Visualizations:** Interactive graphs to help users understand patterns in bird observations based on environmental conditions and seasons.
+
 **Conservation Insights:** Identification of at-risk species and conservation priority recommendations.
+
 **User Interaction:** The app will allow users to interact with the data and filter insights based on their preferences (EG: species, habitat, season).
 
 ### Repository Structure
 #### bird_observation_analysis/
 ├── bird_observation_analysis.ipynb       # Jupyter Notebook for EDA and prototyping (located in VS Code)
+
 ├── visualization.py                      # Python script for reusable visualizations
+
 ├── summary_of_code_structure.py          # Overview of the code structure and organization
+
 ├── data/                                 # Folder for storing observation data (CSV, Excel files)
+
 ├── app/                                  # Streamlit application files
+
 │   └── app.py                            # Main Streamlit app script
+
 ├── requirements.txt                      # List of required Python libraries
+
 └── README.md                             # Project documentation and instructions
 
 ### Getting Started
