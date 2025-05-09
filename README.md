@@ -278,22 +278,16 @@ Based on the visualizations and analyses, identified the key factors that influe
 **User Interaction:** The app will allow users to interact with the data and filter insights based on their preferences (EG: species, habitat, season).
 
 ### Repository Structure
-#### bird_observation_analysis/
-├── bird_observation_analysis.ipynb       # Jupyter Notebook for EDA and prototyping (located in VS Code)
+#### bird_observation_analysis
 
-├── visualization.py                      # Python script for reusable visualizations
-
-├── summary_of_code_structure.py          # Overview of the code structure and organization
-
-├── data/                                 # Folder for storing observation data (CSV, Excel files)
-
-├── app/                                  # Streamlit application files
-
-│   └── app.py                            # Main Streamlit app script
-
-├── requirements.txt                      # List of required Python libraries
-
-└── README.md                             # Project documentation and instructions
+**bird_observation_analysis.ipynb** – Jupyter Notebook for EDA and prototyping
+**visualization.py** – Script containing reusable visualization functions
+**summary_of_code_structure.py** – Provides an overview of the code organization
+**data/** – Folder containing observation datasets (CSV, Excel, etc.)
+**app/**
+    app.py – Main Streamlit app script
+**requirements.txt** – Lists required Python libraries
+**README.md** – Project documentation and setup instructions
 
 ### Getting Started
 - Clone this repository.
