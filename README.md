@@ -248,7 +248,7 @@ Our approach follows a modular and structured workflow
 
 ### Usage: How to Run the Project
 To run the project, open the terminal and use the following command:
-**streamlit run app/app.py**
+**streamlit run app.py**
 
 ### Conclusion
 This project provides valuable insights into bird distribution and behavior, facilitating better conservation and research efforts. The interactive visualizations help researchers and conservationists make data-driven decisions for habitat management. Future updates will further enhance its utility for ecosystem studies.
