@@ -1,0 +1,401 @@
+#Project Title - Bird Species Observation Analysis
+
+
+#Quick Introduction
+#This project analyzes bird species observations across forest and grassland ecosystems.
+#It helps identify patterns in bird counts, distances of sightings, and seasonal or habitat-based behavior.
+#The data is visualized using interactive charts built in Streamlit, and it emphasizes both species-level and environmental insights.
+
+
+#Installation Instructions
+#To run this project, install the following libraries (via pip if not already installed):
+#pip install streamlit pandas plotly openpyxl numpy
+
+#OR (Individually)
+
+# To install the essential libraries for the project, run the following commands in the terminal:
+
+#pip install streamlit - Streamlit library for building the web app
+#pip install pandas - Pandas for data manipulation and handling dataframes
+#pip install plotly - Plotly for creating interactive visualizations
+#pip install openpyxl - Openpyxl to read/write Excel files
+#pip install numpy - NumPy for numerical operations (useful for data manipulation)
+
+
+#Additional Libraries Used:
+
+#pip install seaborn    - Seaborn for advanced statistical data visualization (optional but useful) - Simplifies statistical data visualization
+#pip install matplotlib - Matplotlib for creating static plots (alternative to Plotly) - Creates static, animated, and interactive plots
+#pip install kaleido    - Needed if exporting Plotly graphs as static images
+#pip install geopandas folium
+   #GeoPandas for geospatial data manipulation (working with shapefiles, GeoJSON, etc.)
+   #Folium for creating interactive maps (visualizing geospatial data on maps)
+
+#Skills Takeaway from This Project
+
+#Data Cleaning and Preprocessing
+  #Removing errors, duplicates, and formatting issues to prepare raw bird data for analysis.
+  #Why? → To ensure accurate and usable data.
+
+#Exploratory Data Analysis (EDA)
+  #Summarizing key patterns, trends, and distributions in bird observations.
+  #Why? → To understand the data better before deep analysis.
+
+#Data Visualization
+  #Using graphs and charts to show bird patterns, species count, and trends clearly.
+  #Why? → Makes findings easy to understand and communicate.
+
+#Geographic Analysis
+  #Analyzing bird data based on location (forest, grassland, region).
+  #Why? → To study how bird species vary by habitat or area.
+
+#Species Analysis
+  #Investigating bird species diversity, conservation status, and watchlist presence.
+  #Why? → Helps identify species at risk and their distribution.
+
+#Streamlit
+  #Used to build an interactive web app to display bird data and visuals.
+  #Why? → For easy sharing and user-friendly analysis dashboard.
+
+#Domain
+#Environmental Studies, Biodiversity Conservation, and Ecology
+  #This project falls under the study of nature, species diversity, and ecosystem health.
+  #Why? → Because it helps track bird populations and supports conservation decisions.
+
+
+
+#Importing Required Libraries
+import streamlit as st             #Streamlit library for building the web app
+import pandas as pd                #Pandas to manipulate dataframes
+import plotly.express as px        #Plotly for creating interactive visualizations
+from datetime import datetime      #Used to fetch the current time for personalized greeting
+import numpy as np                 #NumPy for numerical operations
+import plotly.graph_objects as go  #Plotly for interactive visualizations
+import geopandas as gpd            #For spatial data manipulation
+from shapely.geometry import Point #For creating geometries
+import matplotlib.patches as mpatches  #For custom plot patches (legends, shapes)
+import matplotlib.ticker as ticker #Used to format axis ticks (e.g., force integer ticks on axes)
+import folium                      # For creating interactive maps
+from folium.plugins import HeatMap # For adding heatmap to the map
+
+#External Dataset Files Used
+#Forest Dataset   : Contains bird observation data collected from forest ecosystems
+#Grassland Dataset: Contains bird observation data collected from grassland ecosystems
+
+#Dataset Path - Excel 
+forest_data = pd.read_excel(
+        r"C:\Users\Bala Sowntharya\Documents\Project 2 - Bird Species Observation Analysis in Forest and Grassland Ecosystem\data_raw_excel files\Bird_Monitoring_Data_FOREST.XLSX"
+    )
+grassland_data = pd.read_excel(
+        r"C:\Users\Bala Sowntharya\Documents\Project 2 - Bird Species Observation Analysis in Forest and Grassland Ecosystem\data_raw_excel files\Bird_Monitoring_Data_GRASSLAND.XLSX"
+    )
+
+#Key Code Components & Functions
+   #Pandas Functions
+   #Ploty Functions
+   #Streamlit Functions
+   #Datetime Functions
+   #NumPy Functions
+   #Custom Functions
+   # GeoPandas Functions (for geospatial data manipulation)
+   # Folium Functions (for creating interactive maps)
+
+#Main Key Components – High-level commands/functions used across the project
+##Sub Key Notes      – Contextual usage examples or project-specific applications
+
+#1) Pandas Functions
+#Main Key Components
+   #pd.read_excel(): Loads data from Excel files into a pandas DataFrame
+   #df.columns.str.strip(): Removes leading/trailing whitespace characters from column names
+   #pd.concat(): Concatenates two or more DataFrames along a particular axis (used for merging datasets)
+   #df.replace(): Replaces specific values with others, e.g., replacing placeholder '-' with NaN
+   #df.dropna(): Removes rows with missing data (NaN)
+   #df.drop_duplicates(): Removes duplicate observations
+   #df.isnull(): Checks for missing values in the DataFrame (returns a boolean DataFrame)
+   #pd.to_numeric(): Converts a column to numeric values, handling errors gracefully
+   #df.groupby(): Groups data by specific columns (used for aggregation, e.g., species count by habitat)
+   #df['col'].fillna(): Fills missing values in a column with a specified value
+   #df['col'].astype(): Converts the datatype of a column (e.g., to int or str)
+   #df.melt() – Unpivots DataFrame from wide to long format (used in migration patterns)
+   #df.pivot_table() – Summarizes data with multi-dimensional keys (used in migration)
+   #df.pivot() – Used in heatmap visualizations
+   #df.nunique() – Gets the number of unique species/habitats
+   #df.sort_values() – Used to order species counts
+   #df.reset_index() – Converts grouped index back into columns
+   #df.isin() – Filters rows based on a list of values (used with sky and wind conditions)
+
+##Sub Key Notes
+  #pd.to_numeric(df['Distance'], errors='coerce'): Converts 'Distance' to numeric, coercing invalid values to NaN
+  #df.dropna(subset=['Distance', 'Initial_Three_Min_Cnt', 'Common_Name']): Drops rows only if any of the specified columns are NaN
+  #df['Common_Name'] = df['Common_Name'].fillna("Unknown"): Fills missing bird names with "Unknown"
+  #df['Location_Type'] = df['Location_Type'].fillna("Unknown"): Fills missing habitat types with "Unknown"
+  #df['Initial_Three_Min_Cnt'] = df['Initial_Three_Min_Cnt'].astype(int): Converts count column to integers after cleaning
+
+#2) Plotly functions
+#Main Key Components
+  #px.scatter(): Creates a scatter plot to visualize the relationship between two numeric variables
+  #px.bar(): Creates a bar chart for visualizing categorical data (e.g., bird species count)
+  #px.strip(): Creates a strip plot to display the distribution of data points along a single axis
+  #px.box(): Displays the distribution and outliers of numerical data by category
+  #st.plotly_chart(): Displays an interactive Plotly chart in the Streamlit app
+  #px.line(): Creates a line plot to visualize trends over time or ordered data points (used for trend analysis)
+  #px.density_heatmap(): Generates density-based heatmaps (used for month-wise data)
+  #go.Heatmap(): Lower-level plotly.graph_objects heatmap (used for year-wise heatmaps)
+  #st.plotly_chart(): Embeds interactive Plotly figures in Streamlit
+  #fig.update_layout(): Modifies chart layout (e.g., title, axis format)
+  #fig.update_traces(): Edits traces (e.g., annotations, styles)
+  #facet_col in px.bar(): Used to split visuals by column (season-wise view)
+  #color_discrete_map={...}: Applies custom color palette to chart categories
+  #template='plotly_dark' or template='seaborn': Applies predefined themes
+  #plotly.express.bar(): Plots beautiful grouped bar charts in Streamlit
+
+##Sub-Key Notes
+  #px.bar(df, x='Common_Name', y='Initial_Three_Min_Cnt'): Visualizes top observed bird species
+  #px.scatter(df, x='Distance', y='Initial_Three_Min_Cnt', color='Habitat'): Plots bird counts by distance
+  #go.Heatmap(...) with x=str(Year) and z=Count: Used for year-wise heatmaps with clean x-axis
+  #fig.update_traces(textposition='outside'): Adds readable labels on bar charts (Top Species)
+  #category_orders={'Month': [str(i) for i in range(1,13)]}: Fixes month order in heatmap
+  #use_container_width=True: Ensures the chart adjusts to screen width in the app
+
+#Seaborn / Matplotlib
+#sns.heatmap()            – Heatmap of correlations
+#plt.figure(), plt.show() – Basic matplotlib plots
+
+#3) Streamlit functions
+#Main Key Components
+#st.title(): Displays the main title of a page
+#st.header(): Adds a large section heading
+#st.subheader(): Adds a smaller heading under a section
+#st.markdown(): Renders rich markdown content (bullets, bold text, etc.)
+#st.write(): Displays text, charts, DataFrames, etc.
+#st.dataframe(): Displays a scrollable, interactive data table
+#st.metric(): (Recommended) Show high-level stats (e.g., total species observed)
+#st.plotly_chart(): Displays Plotly charts interactively within the app
+#st.warning(), st.success(), st.error(): Used for feedback messages
+#st.sidebar.radio(): Sidebar radio buttons for page navigation
+#st.sidebar.selectbox(): Sidebar dropdown menus
+#st.expander(): Wraps extra content in a collapsible box
+#st.selectbox(), st.multiselect(): Dropdown and multi-select filters
+#st.slider(): Adds interactive sliders (e.g., for date ranges)
+#st.cache_data: Caches data-loading functions to improve performance
+
+##Sub Key Notes
+  #st.sidebar.radio("Feature Descriptions", [...]): Controls navigation across dashboard sections
+  #with st.sidebar.expander("Filter Options"): Keeps the sidebar clean while offering filters
+  #st.success(f"Total Observations: {total_obs}"): Displays key statistics with emphasis
+  #st.plotly_chart(fig, use_container_width=True): Ensures responsive visualization layout
+  #st.warning("No data available..."): Handles edge cases like empty filters gracefully
+  #st.dataframe(migration_data): Used to display pivoted migration matrix
+  #st.markdown("""...""") inside an expander: Used effectively for documentation and dashboard guide
+
+
+#4) DateTime Functions
+##Main Key Components
+#datetime.now(): Gets the current system time — used for dynamic greetings
+#datetime.strptime(): Parses strings into datetime objects (if needed in future expansion)
+#pd.to_datetime(): Converts a column of date strings into proper datetime format
+#dt.year, dt.month: Extracts year and month from datetime column
+#.apply(get_season): Maps dates to seasonal labels using custom logic
+
+##Sub Key Notes
+  #current_hour = datetime.now().hour: Determines greeting (Morning/Afternoon/Evening)
+  #df['Date'] = pd.to_datetime(df['Date'], errors='coerce'): Safely converts invalid entries to NaT
+  #df.dropna(subset=['Date']): Ensures only valid dates are used for time-based analysis
+  #df['Year'] = df['Date'].dt.year, df['Month'] = df['Date'].dt.month: Supports temporal filters and visualizations
+  #get_season(month) and map_season(month): Categorizes observations into seasons (Winter, Spring, Summer, Fall)
+
+
+#5) NumPy Functions
+#np.nan: Represents a missing or undefined value (used to handle missing data)
+#np.where(): Creates conditional logic to replace or identify certain values in arrays (used for categorizing)
+#np.array(): Creates a numpy array, often used for numeric data manipulation
+#np.unique(): Identifies unique values in an array (used for finding unique species or observation categories)
+
+##Sub Key Notes
+  #Used mainly in:
+    #Filling missing values (df.replace([...], np.nan))
+    #Creating flags or categories (e.g., if distance is near/far)
+      #Example: df['Flyover_Observed'] = np.where(df['Flyover_Observed'] == True, 25, -25) – recoding logic for flyover species
+
+
+#6) Custom Functions
+#Main Key Components
+  #get_season(date): Returns season based on month — e.g., Dec-Feb = Winter
+  #map_season(month): Lambda-style mapping for month-to-season logic
+  #get_distance_category(distance): (Optional/expandable) Categorizes distances into Near, Medium, Far
+  #def custom_bins(...): Any future functions for binning (e.g., temperature or humidity)
+
+##Sub Key Notes
+  #df['Season'] = df['Month'].apply(get_season): Used throughout seasonal pages
+
+
+#7) File Handling
+#with open(...) as f: – Reading/writing files
+#df.to_excel()        - Saving cleaned data
+
+
+#8) Warnings
+#try...except – Used in functions that handle parsing or calculations
+
+
+#9) Streamlit Components / Extensions (Optional Use)
+#st.components.v1.html() – To embed HTML (used for Folium fallback or custom messages)
+#streamlit_folium.folium_static() – To render folium maps in Streamlit (already known)
+#st.session_state – To preserve user interactions between reruns (used if your app supports dynamic interactions or memory)
+
+
+#10) String Utilities
+#str.lower(), str.replace() – Used during species/habitat cleanup
+
+
+#11) Math/Stats
+#from statistics import mean, median
+  #Category: Statistical Functions
+  #Mean()  : Calculates the average (arithmetic mean) of a list of numbers
+  #Median(): Returns the middle value in a sorted list of numbers
+#df.describe() – Basic statistical summaries
+
+##Sub Key Notes
+  #mean([x, y, z])  : Returns the average value
+  #median([x, y, z]): Returns the median (middle) value
+
+#Category: Pandas Functions (Statistical Methods)
+#Main Key Components
+#df['column'].mean()    #Returns the average (arithmetic mean) of a numeric column  
+#df['column'].median()  #Returns the median (middle value)  
+#df['column'].mode()    #Returns the mode(s) — most frequent value(s)  
+#df['column'].std()     #Returns the standard deviation (spread of the data)
+#df['column'].count()   #Returns the number of non-null values
+#df['column'].min()     #Returns the minimum value
+#df['column'].max()     #Returns the maximum value
+
+##Sub Key Notes
+#df['Initial_Three_Min_Cnt'].mean(): Calculates the average bird count observed
+#df['Distance'].median()           : Gets the median distance of observations
+#df['Season'].mode()[0]            : Identifies the most frequently occurring season  
+#df['Distance'].std()              : Measures variation in bird sighting distances
+#df['Common_Name'].count()         : Total number of bird name entries recorded  
+#df['Distance'].min()              : Shortest observed distance in any sighting  
+#df['Distance'].max()              : Farthest observed distance in any sighting
+
+#Data Dictionary
+
+# Column Name               | Description                             
+#---------------------------|----------------------------------------
+# Common_Name               | Bird species name                       
+# Location_Type             | Habitat type (Forest or Grassland)      
+# Date                      | Observation date                        
+# Initial_Three_Min_Cnt     | Count of birds seen in first 3 minutes 
+# Distance                  | Distance from observer (range format)   
+# Flyover_Observed          | Whether species was flying overhead     
+# Plot_Name                 | Specific survey location/region         
+# Temperature               | Ambient temperature (°C)                
+# Humidity                  | Relative humidity (%)                   
+
+#Streamlit Navigation Structure
+
+#Page Title                                                             Description
+
+#Home	                                            Overview of the project goals, data context, and key insights
+#Species Distribution – Distance & Flyover Trends	Analyzes species movement, flyover behavior, and spatial reach
+#Temporal Heatmap     – Monthly Activity	        Visualizes monthly bird observation intensity across time
+#Species Filters      – Environmental Patterns	  Filter observations by species and examine environmental influences
+#Species Richness	                                Shows count of unique species observed in each habitat type
+#Top Observed Species	                            Highlights the most frequently recorded bird species
+#Species Activity by Region and Season	          Examines seasonal and regional occurrence of species
+#Temperature Bin by Habitat	                      Distribution of species sightings across temperature intervals
+#Humidity Bin by Habitat	                        Bird activity patterns under different humidity levels
+#Sky Conditions	                                  Impact of cloud/sky cover on bird visibility
+#Wind Conditions	                                Observations in relation to wind strength and type
+#Seasonal Observation Counts	                    Number of bird observations categorized by season
+#Seasonal Time Factor	                            Trends in bird activity across times of day and seasons
+#Flyover Observed Species	                        Analysis of species often recorded as flyovers
+#Species Migration Patterns	                      Temporal and regional migratory behavior of species
+#At-Risk Species & Conservation	                  Focus on species under conservation concern
+#Top 5 At-Risk Species	                          Most frequently observed vulnerable or endangered birds
+
+#Code Workflow Summary
+
+#Data Loading & Merging
+#Datasets from forest and grassland habitats are merged after cleaning for unified analysis
+
+#Filtering Mechanisms
+#Users can interactively filter the data by species, habitat, year, or month, allowing focused exploration of specific patterns.
+
+#Visualization Logic
+#A variety of dynamic visualizations—including heatmaps, bar charts, and geographic maps—are generated using Plotly for an engaging and interactive experience.
+
+#Page Routing (Streamlit)
+#Each analytical section is mapped to a sidebar route using Streamlit’s navigation, enabling smooth user transitions between different insights.
+
+
+#Highlights & Key Features
+#A concise summary of the most impactful and user-friendly elements of the application
+
+#Interactive Filters
+#Users can tailor insights by selecting habitats, species, and observation timelines in real time.
+
+#Temporal Analysis
+#Year-wise and month-wise heatmaps highlight seasonal bird activity and observation density.
+
+#Environmental Impact Insights
+#Analysis of bird activity across varying temperatures, humidity levels, sky conditions, and wind speeds.
+
+#Conservation-Oriented Focus
+#Dedicated pages track at-risk species, highlight their observation frequency, and support data-informed conservation efforts.
+
+
+#Visualization Techniques
+#1) Heatmaps - Heatmaps display data in a matrix form where individual values are represented by colors
+  #Where it is used
+    #Temporal Heatmaps: Year-wise and month-wise bird observation trends, showing seasonal and monthly activity patterns
+
+#2) Bar Charts - Bar charts use rectangular bars to represent data, making comparisons easier by visualizing the magnitude of different categories
+  #Where it is used
+    #Top Observed Species: Displays the frequency of bird species observed, helping to identify the most common species
+    #Seasonal Observation Counts: Compares the number of observations across different seasons to show seasonal trends
+
+#3) Scatter Plots - Scatter plots represent data points on a two-dimensional plane to visualize relationships between variables
+  #Where it is used
+    #Environmental Analysis: Correlates environmental factors (e.g., temperature, humidity) with bird observations, allowing exploration of how these factors affect species activity  
+
+
+#Short Descriptions for Navigation
+
+#Home - Overview & Insights: Summary of key findings, insights, and easy navigation to other sections.
+
+#Species Distribution - Distance & Flyover Trends: Analyze trends in species distribution using distance and flyover observation data.
+
+#Temporal Heatmap - Monthly Activity: Visualize bird activity patterns across months and years to spot seasonal trends.
+
+#Geographic Mapping - Compare species diversity in forest and grassland ecosystems.
+
+#Species Filters - Environmental Patterns: Apply filters to explore how environmental factors like temperature and humidity influence species distribution.
+
+#Species Richness - Count of Unique Species: View the count of unique species observed across different habitats.
+
+#Top Observed Species - Most Frequently Recorded Species: Discover the most frequently recorded species across the ecosystems.
+
+#Species Activity by Region and Season: Explore the seasonal and regional presence of bird species across various habitats.
+
+#Temperature Bin by Habitat - Species Distribution Across Temperature Ranges: Study how species are distributed based on varying temperature ranges in different habitats.
+
+#Humidity Bin by Habitat - Observation Patterns Under Varying Humidity Conditions: Explore how different humidity levels influence bird observations.
+
+#Sky Conditions - Effect of Sky/Cloud Cover on Species Visibility: Analyze the impact of sky and cloud cover on species visibility.
+
+#Wind Conditions - Influence of Wind Conditions on Bird Observations: Explore how varying wind conditions affect bird activity and observations.
+
+#Seasonal Observation Counts - Number of Observations Across Different Seasons: View how bird observation counts vary across the seasons.
+
+#Seasonal Time Factor - Time-of-Day Activity Trends Across Seasons: Study how time-of-day impacts bird activity across different seasons.
+
+#Flyover Observed Species - Analysis of Species Recorded as Flyovers: Explore which species have been recorded as flyovers across different regions.
+
+#Species Migration Patterns - Migratory Trends Across Months and Regions: Analyze the migration patterns of bird species based on seasonal and regional changes.
+
+#At-Risk Species & Conservation - Highlighting Conservation-Priority Species: Learn about species that are at risk and need conservation efforts.
+
+#At-Risk Species & Conservation - Top 5 At-Risk Species: View the top 5 most observed vulnerable or endangered species.
+
+#High Activity Zones - Species Count: Explore the high-activity zones and the count of species observed across different ecosystems.
