@@ -5,6 +5,9 @@ The project aims to analyze the distribution and diversity of bird species in tw
 
 **Domain:** Environmental Studies, Biodiversity Conservation, and Ecology
 
+### Project Overview
+This project analyzes bird species distribution and diversity in forests and grasslands to understand how habitat factors like vegetation, climate, and terrain influence bird populations. It aims to identify habitat preferences and assess the impact of environmental conditions on avian diversity, supporting conservation and biodiversity efforts.
+
 ### Approach
 
 - **Data Loading & Cleaning**: Load datasets using `pandas` and `openpyxl`, handle missing values, format dates, and standardize entries.
