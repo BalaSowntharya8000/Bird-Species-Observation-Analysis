@@ -226,14 +226,15 @@ Our approach follows a modular and structured workflow
 - **Visualizations:** Interactive graphs to help users understand patterns in bird observations based on environmental conditions and seasons.
 - **Conservation Insights:** Identification of at-risk species and conservation priority recommendations.
 - **User Interaction:** The app will allow users to interact with the data and filter insights based on their preferences (EG: species, habitat, season).
+- All visualizations are presented using standard units (e.g., observation count, meters for distance, and binary encoding for flyovers) for clarity and consistency.
 
 ### Repository Structure
 #### bird_observation_analysis
 
-- **bird_observation_analysis.ipynb** – Jupyter Notebook for EDA and prototyping
+- **bird_observation_analysis.ipynb** – Jupyter Notebook for EDA and prototyping (Located in VS Code)
 - **visualization.py** – Script containing reusable visualization functions
 - **summary_of_code_structure.py** – Provides an overview of the code organization
-- **data/** – Folder containing observation datasets (CSV, Excel, etc.)
+- **data/** – Folder containing observation datasets (Excel)
 - **app/**
     app.py – Main Streamlit app script
 - **requirements.txt** – Lists required Python libraries
@@ -259,4 +260,5 @@ Geographic mapping for location to highlight high-activity zones
 ### Acknowledgements
 Streamlit Documents - https://docs.streamlit.io/develop/api-reference/widgets/st.slider
 
-#### Author Bala Sowntharya Bala Subramanian
+#### Author 
+#### Bala Sowntharya Bala Subramanian
