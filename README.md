@@ -151,7 +151,7 @@ The dataset is split across multiple sheets representing different administrativ
 - **ROCR**: Data for the Rock Creek Park.
 - **WOTR**: Data for the Wolf Trap National Park for the Performing Arts.
 
-### DetailedApproach
+### Detailed Approach
 Our approach follows a modular and structured workflow
 
 **Data Loading & Cleaning**
@@ -218,7 +218,7 @@ Our approach follows a modular and structured workflow
 - **Kaleido**: For exporting Plotly charts as static images.
 - **VS Code** – Development environment
 
-### Appliaction Tools:
+### Application Tools:
 - **VS Code:** Used as the integrated development environment (IDE) for writing Python code, Jupyter Notebooks, and managing project files.
 - **Git & GitHub:** For version control and managing the code repository, ensuring smooth collaboration and tracking changes.
 - **Python Environment:** Virtual environments like venv to manage dependencies for the project.
