@@ -21,9 +21,16 @@
 #pip install openpyxl - Openpyxl to read/write Excel files
 #pip install numpy - NumPy for numerical operations (useful for data manipulation)
 
+#Libraries
+#Streamlit           : A Python library for building interactive web apps for data science and machine learning
+#Pandas              : A Python library for data manipulation and analysis using DataFrames
+#Plotly              : A library for creating interactive and customizable visualizations
+#NumPy               : A library for numerical operations, especially with arrays and matrices
+#plotly.graph_objects: A Plotly module for building detailed and customizable plots manually
+#plotly.express      : A simpler Plotly module for quickly creating interactive charts with less code
+#datetime            : A Python module for working with dates and times
 
 #Additional Libraries Used:
-
 #pip install seaborn    - Seaborn for advanced statistical data visualization (optional but useful) - Simplifies statistical data visualization
 #pip install matplotlib - Matplotlib for creating static plots (alternative to Plotly) - Creates static, animated, and interactive plots
 #pip install kaleido    - Needed if exporting Plotly graphs as static images
